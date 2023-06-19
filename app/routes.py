@@ -34,10 +34,8 @@ def index() -> Response:
 @with_token
 def print_current_user(user) -> Response:
     return jsonify({
-        "user": {
-            "user_id": user.user_id,
-            "username": user.username
-        }
+        "user_id": user.user_id,
+        "username": user.username
     }), 200
 
 
@@ -75,10 +73,7 @@ def register() -> Response:
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({
-        "action": "register",
-        "state": "success"
-    })
+    return new_user.jsonify(), 201
 
 # user login handler
 @bp.route("/users/token/generate", methods=["POST"])
@@ -101,13 +96,9 @@ def login() -> Response:
     }, current_app.config["SECRET_KEY"], "HS256")
 
     return jsonify({
-        "action": "login",
-        "state": "successs",
-        "token" : {
-            "content": token,
-            "expirates": exp.isoformat()
-        }
-    })
+        "token": token,
+        "expirates": exp.isoformat()
+    }), 200
 
 
 # index movies
@@ -194,4 +185,4 @@ def delete_movie(user, movie_id) -> Response:
     Movie.query.filter_by(movie_id=movie.movie_id).delete()
     db.session.commit()
 
-    return jsonify({"movie": movie.jsonify()}), 200
+    return movie.jsonify(), 200

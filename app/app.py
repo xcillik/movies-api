@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from models import db, Movie, User
 import os
-from werkzeug.security import generate_password_hash,check_password_hash
+from werkzeug.security import generate_password_hash
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -9,7 +9,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 def app_init() -> Flask:
     app = Flask(__name__)
     app.config['SECRET_KEY'] = "430d0a6205bbd7c650f0660c2b082e68"
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "database.db")
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + os.path.join(basedir, "db/database.sqlite")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     db.init_app(app)
 

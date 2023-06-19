@@ -11,10 +11,9 @@ Support for pagination is implemented as well.
 ## Usage
 Runs in docker container. Clone this repository and use the script run.sh to start the application.
 
-Log will be in the console providing the IP address to access the API endpoints.
+Log in the console provides an IP address to access the API endpoints.
 
-Basic configuration on the host is:
-
+Basic configuration on the host is:<br />
 http://127.0.0.1:8080/<br />
 (Port 8080 is used to avoid collisions on local machines)
 
@@ -43,13 +42,19 @@ curl --request GET \
 ### /user
 [GET]<br />
 Requires jwt token.<br />
-Returns information about current user.
+Returns information about the current user.
 
 ```bash
 curl --request GET \
   --url http://127.0.0.1:8080/user \
-  --header 'Authorization: Bearer TOKEN' \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiIxMjAyOWU1Mi03ZjgzLTRlMWEtYWQ2ZC1kOWJiOTllNzZkOGYiLCJleHBpcmF0ZXMiOiIyMDIzLTA2LTE5VDEyOjMxOjE1LjQxNDExOSJ9.8ls0UHrRlLPlt1hGFzZTMv1wL0pLe4NhTsV1388i95Q' \
   --header 'Content-Type: multipart/form-data'
+```
+```json
+{
+  "user_id": 1,
+  "username": "john"
+}
 ```
 
 ### /users
@@ -70,13 +75,13 @@ curl --request GET \
 
 ### /users
 [POST]<br />
-Adds user to the database.
+Adds a user to the database.
 
 Requires POST form data:<br />
 username<br />
 password
 
-Returns information about success with code 200.
+Returns information about the new user with code 201.
 
 ```bash
 curl --request POST \
@@ -85,16 +90,32 @@ curl --request POST \
   --form username=franz \
   --form password=0000
 ```
+```json
+[
+  {
+    "password": "********",
+    "public_id": "(hidden)",
+    "user_id": 1,
+    "username": "john"
+  },
+  {
+    "password": "********",
+    "public_id": "(hidden)",
+    "user_id": 2,
+    "username": "mark"
+  }
+]
+```
 
 ### /users/token/generate
 [POST]<br />
-Returns jwt token to the coresponding user.
+Returns a jwt token to the coresponding user.
 
 Requires POST form data:<br />
 username<br />
 password
 
-Token is valid 30 minutes since request.
+The token is valid 30 minutes since the request.
 
 ```bash
 curl --request POST \
@@ -103,14 +124,20 @@ curl --request POST \
   --form username=franz \
   --form password=0000
 ```
+```json
+{
+  "expirates": "2023-06-19T12:31:15.414119",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiIxMjAyOWU1Mi03ZjgzLTRlMWEtYWQ2ZC1kOWJiOTllNzZkOGYiLCJleHBpcmF0ZXMiOiIyMDIzLTA2LTE5VDEyOjMxOjE1LjQxNDExOSJ9.8ls0UHrRlLPlt1hGFzZTMv1wL0pLe4NhTsV1388i95Q"
+}
+```
 
 ### /movies
 [GET]<br />
-Index all movies.
+Index all movies stored in the database.
 
 Supports pagination:<br />
 /movies?page=<int:page_num>&per_page=<int:per_page><br />
-(both are optional in the query; if omitted defaults are applied page=1 & per_page=20)
+(both are optional in query; if omitted defaults are applied page=1 & per_page=20)
 
 Returns headers (X-Total, X-Pages-Total, ...) with infomation about pagination.
 
@@ -118,6 +145,38 @@ Returns headers (X-Total, X-Pages-Total, ...) with infomation about pagination.
 curl --request GET \
   --url http://127.0.0.1:8080/movies \
   --header 'Content-Type: multipart/form-data'
+```
+```json
+[
+  {
+    "description": "The Matrix is a computer-generated gream world...",
+    "movie_id": 1,
+    "release_year": 1999,
+    "title": "The Matrix",
+    "user_id": 1
+  },
+  {
+    "description": "Continuation of the cult classic The Matrix...",
+    "movie_id": 2,
+    "release_year": 2003,
+    "title": "The Matrix Reloaded",
+    "user_id": 2
+  },
+  {
+    "description": "Lorem ipsum dolor sit amet...",
+    "movie_id": 3,
+    "release_year": 2005,
+    "title": "The Movie 0",
+    "user_id": 1
+  },
+  {
+    "description": "Lorem ipsum dolor sit amet...",
+    "movie_id": 5,
+    "release_year": 2005,
+    "title": "The Movie 2",
+    "user_id": 1
+  }
+]
 ```
 
 ### /movies/\<int:movie_id\>
@@ -129,10 +188,19 @@ curl --request GET \
   --url http://127.0.0.1:8080/movies/1 \
   --header 'Content-Type: multipart/form-data'
 ```
+```json
+{
+  "description": "The Matrix is a computer-generated gream world...",
+  "movie_id": 1,
+  "release_year": 1999,
+  "title": "The Matrix",
+  "user_id": 1
+}
+```
 
 ### /movies
 [POST]<br />
-Requires jwt token.<br />
+Requires a jwt token.<br />
 Adds new movie to the database.
 
 Requires POST form data:<br />
@@ -140,23 +208,32 @@ title<br />
 release_year<br />
 description
 
-Returns information about new movie with code 200.
+Returns information about new movie with code 201.
 
 ```bash
 curl --request POST \
   --url http://127.0.0.1:8080/movies \
-  --header 'Authorization: Bearer TOKEN' \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiIxMjAyOWU1Mi03ZjgzLTRlMWEtYWQ2ZC1kOWJiOTllNzZkOGYiLCJleHBpcmF0ZXMiOiIyMDIzLTA2LTE5VDEyOjMxOjE1LjQxNDExOSJ9.8ls0UHrRlLPlt1hGFzZTMv1wL0pLe4NhTsV1388i95Q' \
   --header 'Content-Type: multipart/form-data' \
   --form 'title=The Movie X' \
   --form release_year=2015 \
   --form 'description=Lorem ipsum dolor sit amet...'
 ```
+```json
+{
+  "description": "Lorem ipsum dolor sit amet...",
+  "movie_id": 46,
+  "release_year": 2015,
+  "title": "The Movie X",
+  "user_id": 6
+}
+```
 
 ### /movies/\<int:movie_id\>
 [PUT]<br />
 Updates information about a movie in the database specified by movie_id in the URL.<br />
-Requires jwt token.<br />
-Only owner can change the attributes.
+Requires a jwt token.<br />
+Attributes of a movie can be change only by the user that created the movie.
 
 Requires POST form data:<br />
 title<br />
@@ -168,11 +245,20 @@ Returns movie data with code 200.
 ```bash
 curl --request PUT \
   --url http://127.0.0.1:8080/movies/4 \
-  --header 'Authorization: Bearer TOKEN' \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiIxMjAyOWU1Mi03ZjgzLTRlMWEtYWQ2ZC1kOWJiOTllNzZkOGYiLCJleHBpcmF0ZXMiOiIyMDIzLTA2LTE5VDEyOjMxOjE1LjQxNDExOSJ9.8ls0UHrRlLPlt1hGFzZTMv1wL0pLe4NhTsV1388i95Q' \
   --header 'Content-Type: multipart/form-data' \
   --form 'title=The Movie X' \
   --form release_year=2015 \
   --form 'description=Lorem ipsum dolor sit amet...'
+```
+```json
+{
+  "description": "Lorem ipsum dolor sit amet...",
+  "movie_id": 10,
+  "release_year": 2015,
+  "title": "The Movie X",
+  "user_id": 1
+}
 ```
 
 ### /movies/\<int:movie_id\>
@@ -186,6 +272,15 @@ Returns information about deleted movie with code 200.
 ```bash
 curl --request DELETE \
   --url http://127.0.0.1:8080/movies/4 \
-  --header 'Authorization: Bearer TOKEN' \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNfaWQiOiIxMjAyOWU1Mi03ZjgzLTRlMWEtYWQ2ZC1kOWJiOTllNzZkOGYiLCJleHBpcmF0ZXMiOiIyMDIzLTA2LTE5VDEyOjMxOjE1LjQxNDExOSJ9.8ls0UHrRlLPlt1hGFzZTMv1wL0pLe4NhTsV1388i95Q' \
   --header 'Content-Type: multipart/form-data'
+```
+```json
+{
+  "description": "Lorem ipsum dolor sit amet...",
+  "movie_id": 10,
+  "release_year": 2015,
+  "title": "The Movie X",
+  "user_id": 1
+}
 ```
