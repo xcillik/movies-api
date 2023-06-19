@@ -18,16 +18,18 @@ http://127.0.0.1:8080/<br />
 (Port 8080 is used to avoid collisions on local machines)
 
 ## API endpoints
-[GET, POST] /<br />
-[GET] /user<br />
-[GET] /users<br />
-[POST] /users<br />
-[POST] /users/token/generate<br />
-[GET] /movies<br />
-[GET] /movies/\<int:movie_id\><br />
-[POST] /movies<br />
-[PUT] /movies/\<int:movie_id\><br />
-[DELETE] /movies/\<int:movie_id\><br />
+```
+[GET, POST] /
+[GET] /user
+[GET] /users
+[POST] /users
+[POST] /users/token/generate
+[GET] /movies
+[GET] /movies/\<int:movie_id\>
+[POST] /movies
+[PUT] /movies/\<int:movie_id\>
+[DELETE] /movies/\<int:movie_id\>
+```
 
 ### /
 [GET, POST]<br />
@@ -77,7 +79,7 @@ Index all registered users and get (public) information about them.
 
 Supports pagination:<br />
 ```
-/users?page=\<int:page_num\>&per_page=\<int:per_page\><br />
+/users?page=\<int:page_num\>&per_page=\<int:per_page\>
 ```
 (both are optional in the query; if omitted defaults are applied page=1 & per_page=20)
 
@@ -174,7 +176,7 @@ Index all movies stored in the database.
 
 Supports pagination:<br />
 ```
-/movies?page=\<int:page_num\>&per_page=\<int:per_page\><br />
+/movies?page=\<int:page_num\>&per_page=\<int:per_page\>
 ```
 (both are optional in query; if omitted defaults are applied page=1 & per_page=20)
 
