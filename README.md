@@ -25,10 +25,10 @@ http://127.0.0.1:8080/<br />
 [POST] /users<br />
 [POST] /users/token/generate<br />
 [GET] /movies<br />
-[GET] /movies/<int:movie_id><br />
+[GET] /movies/\<int:movie_id\><br />
 [POST] /movies<br />
-[PUT] /movies/<int:movie_id><br />
-[DELETE] /movies/<int:movie_id><br />
+[PUT] /movies/\<int:movie_id\><br />
+[DELETE] /movies/\<int:movie_id\><br />
 
 ### /
 [GET, POST]<br />
@@ -120,7 +120,7 @@ curl --request GET \
   --header 'Content-Type: multipart/form-data'
 ```
 
-### /movies/<int:movie_id>
+### /movies/\<int:movie_id\>
 [GET]<br />
 Returns information about movie specified by movie_id in the URL.
 
@@ -152,7 +152,7 @@ curl --request POST \
   --form 'description=Lorem ipsum dolor sit amet...'
 ```
 
-### /movies/<int:movie_id>
+### /movies/\<int:movie_id\>
 [PUT]<br />
 Updates information about a movie in the database specified by movie_id in the URL.<br />
 Requires jwt token.<br />
