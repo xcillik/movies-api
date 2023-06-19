@@ -175,7 +175,7 @@ curl --request PUT \
   --form 'description=Lorem ipsum dolor sit amet...'
 ```
 
-### /movies/<int:movie_id>
+### /movies/\<int:movie_id\>
 [DELETE]<br />
 Deletes movie from the database specified by movie_id in the URL.<br />
 Requires jwt token.<br />
