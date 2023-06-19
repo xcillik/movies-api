@@ -25,10 +25,10 @@ http://127.0.0.1:8080/<br />
 [POST] /users
 [POST] /users/token/generate
 [GET] /movies
-[GET] /movies/\<int:movie_id\>
+[GET] /movies/<int:movie_id>
 [POST] /movies
-[PUT] /movies/\<int:movie_id\>
-[DELETE] /movies/\<int:movie_id\>
+[PUT] /movies/<int:movie_id>
+[DELETE] /movies/<int:movie_id>
 ```
 
 ### /
