@@ -35,9 +35,7 @@ class User(db.Model):
     def jsonify(self)  -> Dict[str, Any]:
         return {
             "user_id": self.user_id,
-            "public_id": "(hidden)",
-            "username": self.username,
-            "password": "********"
+            "username": self.username
         }
 
 

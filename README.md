@@ -38,6 +38,20 @@ curl --request GET \
     --url http://127.0.0.1:8080/ \
     --header 'Content-Type: multipart/form-data'
 ```
+```json
+{
+  "api": {
+    "auth": {
+      "current": "http://127.0.0.1:8080/user",
+      "generate_token": "http://127.0.0.1:8080/users/token/generate",
+      "index": "http://127.0.0.1:8080/users",
+      "register": "http://127.0.0.1:8080/users"
+    },
+    "movies": "http://127.0.0.1:8080/movies",
+    "version": "1.0"
+  }
+}
+```
 
 ### /user
 [GET]<br />
@@ -71,6 +85,18 @@ Returns headers (X-Total, X-Pages-Total, ...) with infomation about pagination.
 curl --request GET \
   --url http://127.0.0.1:8080/users \
   --header 'Content-Type: multipart/form-data'
+```
+```json
+[
+  {
+    "user_id": 1,
+    "username": "john"
+  },
+  {
+    "user_id": 2,
+    "username": "mark"
+  }
+]
 ```
 
 ### /users

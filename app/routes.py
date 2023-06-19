@@ -15,14 +15,12 @@ def index() -> Response:
     response = {
         "api": {
             "version": "1.0",
-            "url": request.root_url + "movies",
-            "user": {
+            "movies": request.root_url + "movies",
+            "auth": {
                 "generate_token": request.root_url + "users/token/generate",
-                "register": {
-                    "method": "POST",
-                    "url": request.root_url + "users"
-                },
-                "index": request.root_url + "user"
+                "register": request.root_url + "users",
+                "current": request.root_url + "user",
+                "index": request.root_url + "users"
             }
         }
     }
