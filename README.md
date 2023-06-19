@@ -79,7 +79,7 @@ Index all registered users and get (public) information about them.
 
 Supports pagination:<br />
 ```
-/users?page=\<int:page_num\>&per_page=\<int:per_page\>
+/users?page=<int:page_num>&per_page=<int:per_page>
 ```
 (both are optional in the query; if omitted defaults are applied page=1 & per_page=20)
 
@@ -176,7 +176,7 @@ Index all movies stored in the database.
 
 Supports pagination:<br />
 ```
-/movies?page=\<int:page_num\>&per_page=\<int:per_page\>
+/movies?page=<int:page_num>&per_page=<int:per_page>
 ```
 (both are optional in query; if omitted defaults are applied page=1 & per_page=20)
 
