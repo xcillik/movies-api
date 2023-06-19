@@ -76,10 +76,21 @@ curl --request GET \
 Index all registered users and get (public) information about them.
 
 Supports pagination:<br />
-/users?page=<int:page_num>&per_page=<int:per_page><br />
+```
+/users?page=\<int:page_num\>&per_page=\<int:per_page\><br />
+```
 (both are optional in the query; if omitted defaults are applied page=1 & per_page=20)
 
-Returns headers (X-Total, X-Pages-Total, ...) with infomation about pagination.
+Returns headers (X-Total, X-Pages-Total, ...) with infomation about pagination: (example)
+```
+X-Total: 2
+X-Pages-Total: 1
+X-Per-Page: 20
+X-Prev-Page: 
+X-Next-Page: 
+X-Prev-Page-Url: 
+X-Next-Page-Url: 
+```
 
 ```bash
 curl --request GET \
@@ -162,10 +173,21 @@ curl --request POST \
 Index all movies stored in the database.
 
 Supports pagination:<br />
-/movies?page=<int:page_num>&per_page=<int:per_page><br />
+```
+/movies?page=\<int:page_num\>&per_page=\<int:per_page\><br />
+```
 (both are optional in query; if omitted defaults are applied page=1 & per_page=20)
 
-Returns headers (X-Total, X-Pages-Total, ...) with infomation about pagination.
+Returns headers (X-Total, X-Pages-Total, ...) with infomation about pagination: (example)
+```
+X-Total: 42
+X-Pages-Total: 3
+X-Per-Page: 20
+X-Prev-Page: 
+X-Next-Page: 2
+X-Prev-Page-Url: 
+X-Next-Page-Url: http://127.0.0.1:8080/movies?page=2
+```
 
 ```bash
 curl --request GET \
