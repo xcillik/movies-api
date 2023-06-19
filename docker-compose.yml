@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  app:
+    container_name: app
+    build:
+      context: container-env
+    ports:
+      - '8080:80'
+    volumes:
+      - ./app:/root/movies-api/app
