@@ -57,7 +57,7 @@ curl --request GET \
 
 ### /user
 [GET]<br />
-Requires jwt token.<br />
+Requires a jwt token.<br />
 Returns information about the current user.
 
 ```bash
@@ -314,7 +314,7 @@ curl --request PUT \
 ### /movies/\<int:movie_id\>
 [DELETE]<br />
 Deletes movie from the database specified by movie_id in the URL.<br />
-Requires jwt token.<br />
+Requires a jwt token.<br />
 Only owner can change the attributes.
 
 Returns information about deleted movie with code 200.
