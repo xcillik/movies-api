@@ -10,9 +10,13 @@ Support for pagination is implemented as well.
 
 ## Usage
 Runs in docker container. Clone this repository and use the script run.sh to start the application.
+
 Log will be in the console providing the IP address to access the API endpoints.
+
 Basic configuration on the host is:
+
 http://127.0.0.1:8080/
+
 (Port 8080 is used to avoid collisions on local machines)
 
 ## API endpoints
